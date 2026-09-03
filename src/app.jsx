@@ -1,12 +1,41 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useContext } from "react";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import Home from "./pages/home/home";
 import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import MainLayout from "./layouts/main-layout";
+import { AuthContext, AuthContextProvider } from "./contexts/auth-context";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+const ProtectedRoute = ({ children }) => {
+  const { token } = useContext(AuthContext);
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
+
+const PublicRoute = ({ children }) => {
+  const { token } = useContext(AuthContext);
+  if (token) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
 
 const routes = createBrowserRouter([
   {
@@ -15,15 +44,31 @@ const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "home",
+        element: <Navigate to="/" replace />,
       },
       {
         path: "login",
-        element: <Login />,
+        element: (
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        ),
       },
       {
         path: "signup",
-        element: <Signup />,
+        element: (
+          <PublicRoute>
+            <Signup />
+          </PublicRoute>
+        ),
       },
     ],
   },
@@ -32,7 +77,9 @@ const routes = createBrowserRouter([
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={routes} />
+      <AuthContextProvider>
+        <RouterProvider router={routes} />
+      </AuthContextProvider>
     </QueryClientProvider>
   );
 };
