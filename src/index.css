@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@utility container {
+  @apply w-full lg:w-6xl mx-auto px-6
+}
+
+
+input {
+  @apply outline-none border border-gray-300 rounded w-3/4 px-3 py-1 focus:border-blue-300
+}
