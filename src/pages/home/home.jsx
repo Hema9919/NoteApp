@@ -152,7 +152,7 @@ const Home = () => {
               ))}
             </div>
           )}
-        </div>
+     
       </section>
 
       {/* Unified Add & Update Modal */}
