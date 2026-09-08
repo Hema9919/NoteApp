@@ -81,6 +81,32 @@ const Home = () => {
               </p>
             </div>
 
+            <div className="flex items-center gap-3">
+              {/* Tab Toggle */}
+              <div className="bg-gray-100 p-1 rounded-xl flex">
+                {/* <button
+                  type="button"
+                  onClick={() => setViewMode("myNotes")}
+                  className={`px-3 py-1.5 text-sm font-medium rounded-lg cursor-pointer transition ${
+                    viewMode === "myNotes"
+                      ? "bg-white text-blue-600 shadow-xs"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  My Notes
+                </button> */}
+                {/* <button
+                  type="button"
+                  onClick={() => setViewMode("allNotes")}
+                  className={`px-3 py-1.5 text-sm font-medium rounded-lg cursor-pointer transition ${
+                    viewMode === "allNotes"
+                      ? "bg-white text-blue-600 shadow-xs"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  All Notes
+                </button> */}
+              </div>
 
               {/* Add Note Button */}
               <button
@@ -152,7 +178,7 @@ const Home = () => {
               ))}
             </div>
           )}
-     
+        </div>
       </section>
 
       {/* Unified Add & Update Modal */}
