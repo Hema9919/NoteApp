@@ -95,7 +95,7 @@ const Home = () => {
                 >
                   My Notes
                 </button>
-                <button
+                {/* <button
                   type="button"
                   onClick={() => setViewMode("allNotes")}
                   className={`px-3 py-1.5 text-sm font-medium rounded-lg cursor-pointer transition ${
@@ -105,7 +105,7 @@ const Home = () => {
                   }`}
                 >
                   All Notes
-                </button>
+                </button> */}
               </div>
 
               {/* Add Note Button */}
